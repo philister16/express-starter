@@ -1,0 +1,23 @@
+{
+  "name": "forgot",
+  "view": "alert",
+  "from": "Team <no-reply@rhinerock.com>",
+  "content": {
+    "en": {
+      "subject": "Reset password request",
+      "body": {
+        "heading": "Reset password request",
+        "main": "Someone has requested to reset the password for this account. Please click the link to reset the password.",
+        "footer": "See you around - the team"
+      }
+    },
+    "de": {
+      "subject": "Passwort zurücksetzen",
+      "body": {
+        "heading": "Passworte zurücksetzen",
+        "main": "Jemand hat das Rücksetzen des Passwortes angefragt. Bitte auf den Link klicken um das Passworte zurückzusetzen.",
+        "footer": "Besten Dank - das Team"
+      }
+    }
+  }
+}

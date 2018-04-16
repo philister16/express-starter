@@ -1,0 +1,23 @@
+{
+  "name": "reset",
+  "view": "message",
+  "from": "Team <no-reply@rhinerock.com>",
+  "content": {
+    "en": {
+      "subject": "Your password was updated",
+      "body": {
+        "heading": "Your password was updated",
+        "main": "Your password was updated, please use the new password from now on.",
+        "footer": "See you around - the team"
+      }
+    },
+    "de": {
+      "subject": "Neues Passwort gesetzt",
+      "body": {
+        "heading": "Neues Passwort wurde gesetzt",
+        "main": "Ein neues Passwort wurde gesetzt, bitte ab sofort mit dem neuen Passwort anmelden.",
+        "footer": "Besten Dank - das Team"
+      }
+    }
+  }
+}
