@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const emailService = require('../services/email.service');
+const passport = require('passport');
 
 exports.signup = (req, res, next) => {
   const user = new User(req.body);
@@ -28,4 +29,16 @@ exports.confirm = (req, res, next) => {
       message: 'Email confirmed'
     });
   });
+}
+
+exports.signin = (req, res, next) => {
+  passport.authenticate('local', { session: false }, (err, user, info) => {
+    if (err) return next(err);
+    if (!user) return res.status(401).json({ status: 'err', message: 'Invalid credentials' });
+    res.status(200).json({
+      status: 'ok',
+      message: 'Signed in',
+      data: user.getInfo()
+    });
+  })(req, res, next);
 }
