@@ -1,0 +1,23 @@
+{
+  "name": "signup",
+  "view": "alert",
+  "from": "Team <no-reply@rhinerock.com>",
+  "content": {
+    "en": {
+      "subject": "Please confirm your email",
+      "body": {
+        "heading": "Please confirm your email!",
+        "main": "Thank you for signing up. To complete your registration, please click on the link to confirm your email address.",
+        "footer": "See you around - the team"
+      }
+    },
+    "de": {
+      "subject": "Bitte E-Mail bestätigen",
+      "body": {
+        "heading": "Bitte E-Mail bestätigen!",
+        "main": "Besten Dank für die Registrierung. Um die Anmeldung abzuschliessen bitte auf den Link klicken um die E-Mail Adresse zu bestätigen.",
+        "footer": "Besten Dank - das Team"
+      }
+    }
+  }
+}
