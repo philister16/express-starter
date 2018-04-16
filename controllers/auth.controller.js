@@ -10,6 +10,22 @@ exports.signup = (req, res, next) => {
       user: user,
       link: user.emailConfirmationToken
     });
-    res.json(user.getInfo());
+    res.status(201).json({
+      status: 'ok',
+      message: 'User created',
+      data: user.getInfo()
+    });
+  });
+}
+
+exports.confirm = (req, res, next) => {
+  User.findOneAndUpdate({ emailConfirmationToken: req.body.token }, { emailConfirmationToken: null, emailConfirmed: true}, (err, user) => {
+    if (err) return next(err);
+    if (!user) return res.status(404).json({ status: 'err', message: 'Not found' });
+    emailService.send('confirmed', user.language, { user: user });
+    res.status(200).json({
+      status: 'ok',
+      message: 'Email confirmed'
+    });
   });
 }

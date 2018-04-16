@@ -1,0 +1,23 @@
+{
+  "name": "confirmed",
+  "view": "message",
+  "from": "Team <no-reply@rhinerock.com>",
+  "content": {
+    "en": {
+      "subject": "Your email was confirmed",
+      "body": {
+        "heading": "Your email was confirmed - thank you",
+        "main": "Thank you for signing up. Your email was confirmed successfully.",
+        "footer": "See you around - the team"
+      }
+    },
+    "de": {
+      "subject": "E-Mail wurde bestätigt",
+      "body": {
+        "heading": "E-Mail wurde bestätigt - vielen Dank",
+        "main": "Besten Dank für die Registrierung. Die E-Mail Adresse wurde erfolgreich bestätigt.",
+        "footer": "Besten Dank - das Team"
+      }
+    }
+  }
+}
