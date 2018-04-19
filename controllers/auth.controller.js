@@ -2,6 +2,7 @@ const User = require('../models/User');
 const emailService = require('../services/email.service');
 const passport = require('passport');
 const crypto = require('crypto');
+const error = require('../services/error.service');
 
 exports.signup = (req, res, next) => {
   const user = new User(req.body);
@@ -12,34 +13,24 @@ exports.signup = (req, res, next) => {
       user: user,
       link: process.env.APP_URL + '/auth/confirm/' + user.emailConfirmationToken
     });
-    res.status(201).json({
-      status: 'ok',
-      message: 'User created'
-    });
+    res.status(201).json(user.getInfo());
   });
 }
 
 exports.confirm = (req, res, next) => {
   User.findOneAndUpdate({ emailConfirmationToken: req.body.token }, { emailConfirmationToken: null, emailConfirmed: true}, (err, user) => {
     if (err) return next(err);
-    if (!user) return res.status(404).json({ status: 'err', message: 'Not found' });
+    if (!user) return next(error.throw(404));
     emailService.send('confirmed', user.language, { user: user });
-    res.status(200).json({
-      status: 'ok',
-      message: 'Email confirmed'
-    });
+    res.status(204).end();
   });
 }
 
 exports.signin = (req, res, next) => {
   passport.authenticate('local', { session: false }, (err, user, info) => {
     if (err) return next(err);
-    if (!user) return res.status(401).json({ status: 'err', message: 'Invalid credentials' });
-    res.status(200).json({
-      status: 'ok',
-      message: 'Signed in',
-      data: user.getInfo()
-    });
+    if (!user) return next(error.throw(404));
+    res.status(200).json(user.getInfo());
   })(req, res, next);
 }
 
@@ -48,22 +39,19 @@ exports.forgot = (req, res, next) => {
   const expiry = Date.now() + 600000;
   User.findOneAndUpdate({ email: req.body.email }, { resetToken: token, resetTokenExp: expiry}, { new: true}, (err, user) => {
     if (err) return next(err);
-    if (!user) return res.status(404).json({ status: 'err', message: 'Not found' });
+    if (!user) return next(error.throw(404));
     emailService.send('forgot', user.language, {
       user: user,
       link: process.env.APP_URL + '/auth/reset/' + token
     });
-    res.status(200).json({
-      status: 'ok',
-      message: 'Reset email sent'
-    });
+    res.status(204).end();
   });
 }
 
 exports.reset = (req, res, next) => {
   User.findOne({ resetToken: req.body.token, resetTokenExp: { $gt: Date.now() }}, (err, user) => {
     if (err) return next(err);
-    if (!user) return res.status(404).json({ status: 'err', message: 'Invalid credentials' });
+    if (!user) return next(error.throw(404));
 
     user.password = req.body.password;
     user.resetToken = undefined;
@@ -71,12 +59,9 @@ exports.reset = (req, res, next) => {
 
     user.save((err, updatedUser) => {
       if (err) return next(err);
-      if (!updatedUser) return res.status(404).json({ status: 'err', message: 'Invalid credentials' });
+      if (!updatedUser) return next(error.throw(404));
       emailService.send('reset', updatedUser.language, { user: updatedUser });
-      res.status(200).json({
-        status: 'ok',
-        message: 'Password reset'
-      });
+      res.status(204).end();
     });
   });
 }

@@ -62,7 +62,7 @@ UserSchema.pre('save', function(next) {
 
 UserSchema.methods.signToken = function() {
   return jwt.sign({
-    id: this._id,
+    _id: this._id,
     permissions: this.permissions
     },
     process.env.SECRET,
@@ -71,10 +71,8 @@ UserSchema.methods.signToken = function() {
 
 UserSchema.methods.getInfo = function() {
   return {
-    user: {
-      language: this.language,
-      token: this.signToken()
-    }
+    language: this.language,
+    token: this.signToken()
   }
 }
 
