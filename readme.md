@@ -38,9 +38,8 @@ Error status are harmonized across the API as follows:
 
 For simplicity response objects are kept as large as necessary and as small as possible. We do generally **not** pass any meta data with the response.
 
-*Example*
-```json
-// The following could be a response holding user information
+*The following example could be a response holding user information.*
+```json 
 {
   "username": "johnny",
   "firstname": "John",
@@ -58,8 +57,8 @@ Success response status codes are harmonized across the API as follows:
 
 The token contains the user information.
 
+*The decoded token as an example:*
 ```json
-// Decoded
 {
   "_id": "5ad4b1c6213af70f73a25c35", // note the _id to for consistency with MongoDB
   "permissions": ["user", "admin"]
@@ -116,10 +115,7 @@ Response (Status 200):
 	"token": "14daa138a994281c10b1719cae774e8b1b83c285d3615f764e25ee1ec8d322c7d9fbf924"
 }
 ```
-Response (Status 204):
-```json
-// No data in response
-```
+Response (Status 204): no data in response
 
 #### Forgot password
 
@@ -129,10 +125,7 @@ Response (Status 204):
 	"email": "tester1@rhinerock.com"
 }
 ```
-Response (Status 200):
-```json
-// No data in response
-```
+Response (Status 200): no data in response
 
 #### Reset password
 
@@ -143,7 +136,4 @@ Response (Status 200):
 	"password": "abcdefgh"
 }
 ```
-Response (Status 200):
-```json
-// No data in response
-```
+Response (Status 200): no data in response

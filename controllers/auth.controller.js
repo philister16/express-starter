@@ -29,7 +29,7 @@ exports.confirm = (req, res, next) => {
 exports.signin = (req, res, next) => {
   passport.authenticate('local', { session: false }, (err, user, info) => {
     if (err) return next(err);
-    if (!user) return next(error.throw(404));
+    if (!user) return next(error.throw(401));
     res.status(200).json(user.getInfo());
   })(req, res, next);
 }

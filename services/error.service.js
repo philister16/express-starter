@@ -7,7 +7,8 @@ exports.throw = (code) => {
     401: 'Invalid credentials',
     403: 'Forbidden',
     404: 'Not found',
-    422: 'Validation error'
+    422: 'Validation error',
+    500: 'Server error'
   }
 
   const err = new Error(messages[code]);
