@@ -16,3 +16,9 @@ exports.throw = (code) => {
   err.text = messages[code];
   return err;
 }
+
+exports.custom = (code, body) => {
+  const err = new Error(code);
+  err.body = body;
+  return err;
+}

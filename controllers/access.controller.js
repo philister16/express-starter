@@ -14,10 +14,7 @@ return null;
 }
 
 const errorHandler = (err, req, res, next) => {
-  if (err.code === 'invalid_token') return res.status(401).json({ status: 'err', message: err.message });
-  if (err.code === 'permission_denied') return res.status(403).json({ status: 'err', message: err.message });
   if (err) return next(err);
-  next();
 }
 
 const access = {

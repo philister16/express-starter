@@ -18,7 +18,7 @@ exports.signup = (req, res, next) => {
 }
 
 exports.confirm = (req, res, next) => {
-  User.findOneAndUpdate({ emailConfirmationToken: req.body.token }, { emailConfirmationToken: null, emailConfirmed: true}, (err, user) => {
+  User.findOneAndUpdate({ emailConfirmationToken: req.body.token }, { emailConfirmationToken: '', emailConfirmed: true}, (err, user) => {
     if (err) return next(err);
     if (!user) return next(error.throw(404));
     emailService.send('confirmed', user.language, { user: user });

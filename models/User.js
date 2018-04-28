@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
+    unique: true, // Unique is not a validator but a reference to create a mongodb native unique index
     match: /\S+@\S+\.\S+/
   },
   emailConfirmed: {
@@ -63,6 +63,7 @@ UserSchema.pre('save', function(next) {
 UserSchema.methods.signToken = function() {
   return jwt.sign({
     _id: this._id,
+    emailConfirmed: this.emailConfirmed,
     permissions: this.permissions
     },
     process.env.SECRET,
@@ -81,7 +82,7 @@ UserSchema.methods.validPassword = function(candidatePassword) {
 }
 
 UserSchema.methods.setEmailConfirmationToken = function() {
-  return this.emailConfirmationToken = crypto.randomBytes(36).toString('hex');
+  return this.emailConfirmationToken = this._id.toString('hex') + crypto.randomBytes(36).toString('hex');
 }
 
 module.exports = mongoose.model('User', UserSchema);
