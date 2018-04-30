@@ -12,6 +12,7 @@ const cors = require('cors');
 
 const app = express();
 
+const error = require('./services/error.service');
 const router = require('./routes');
 
 // Connect to Database
@@ -43,8 +44,6 @@ app.use(passport.initialize());
 // Routes
 app.use(router);
 
-const error = require('./services/error.service');
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = error.throw(404, 'Not found');
@@ -52,12 +51,6 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  // console.error(err);
-  res.json({
-    error: err
-  });
-});
+app.use(error.errorHandler);
 
 module.exports = app;

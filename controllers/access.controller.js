@@ -13,17 +13,12 @@ const extractToken = (req) => {
 return null;
 }
 
-const errorHandler = (err, req, res, next) => {
-  if (err) return next(err);
-}
-
 const access = {
   protect: expressJwt({
     secret: process.env.SECRET,
     getToken: extractToken
   }),
-  guard: guard(),
-  errors: errorHandler
+  guard: guard()
 }
 
 module.exports = access;

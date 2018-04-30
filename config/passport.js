@@ -8,11 +8,11 @@ const localLogin = new LocalStrategy({ usernameField: 'email' }, function(email,
     if (err) return done(err);
 
     if (!user) {
-      return done(null, false, { status: 'err', message: 'Invalid login credentials' });
+      return done(null, false, 'Invalid credentials a');
     }
 
     if (!user.validPassword(password)) {
-      return done(null, false, { status: 'err', message: 'Invalid login credentials'});
+      return done(null, false, 'Invalid credentials b');
     }
 
     return done(null, user);

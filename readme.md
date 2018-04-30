@@ -20,13 +20,14 @@ Errors take the following general format with a status, message and an optional 
 
 ```json
 {
+  "status": 404,
+  "message": "Not found",
   "error": {
-    "status": 404,
-    "text": "Not found"
+    "full error": "object here"
   }
 }
 ```
-Error status are harmonized across the API as follows:
+Error status codes are harmonized across the API as follows:
 
 - **401**: ["Invalid credentials"] For invalid requests, i.e. failed authentication
 - **403**: ["Forbidden"] For forbidden requests, i.e. failed authorization
