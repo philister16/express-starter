@@ -1,5 +1,17 @@
 # Express API Starter
 
+## Getting started
+
+To get started clone the repo and npm install. Then create a .env file with the following basic setup:
+
+```
+DATABASE=<mongo connection string>
+APP_URL=<domain of app for CORS>
+SECRET=<a very secret and long string for JWT>
+MG_API_KEY=<mailgun credentials for email service>
+MG_DOMAIN=<mailgun credentials for email service>
+```
+
 ## API Specification
 
 The following are the specifications of the API in order to achieve consistency across the entire app.

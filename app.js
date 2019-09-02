@@ -14,7 +14,7 @@ const error = require('./services/error.service');
 const router = require('./routes');
 
 // Connect to Database
-mongoose.connect(process.env.DATABASE, {}, function(err) {
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true }, function(err) {
   if (err) {
     console.error('No database connection');
   } else {
